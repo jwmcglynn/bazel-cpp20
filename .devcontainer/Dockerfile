@@ -6,8 +6,7 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:${VARIANT}
 #
 RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends \
-        software-properties-common
+    && apt-get -y install --no-install-recommends software-properties-common
 
 #
 # Install LLVM
@@ -22,8 +21,7 @@ RUN mkdir -p /tmp/llvm \
 # Install libc++
 RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends \
-        libc++-10-dev libc++abi-10-dev
+    && apt-get -y install --no-install-recommends libc++-10-dev libc++abi-10-dev
 
 # Update path so this clang is first.
 ENV PATH=/usr/lib/llvm-10/bin:${PATH}
@@ -31,9 +29,11 @@ ENV PATH=/usr/lib/llvm-10/bin:${PATH}
 #
 # Install bazelisk
 #
-RUN mkdir -p /tmp/bazelisk \
-    && cd /tmp/bazelisk \
-    && wget https://github.com/bazelbuild/bazelisk/releases/latest/download/bazelisk-linux-amd64 \
-    && mv bazelisk-linux-amd64 /usr/local/bin/bazel \
-    && chmod +x /usr/local/bin/bazel \
-    && rm -rf /tmp/bazelisk
+RUN wget https://github.com/bazelbuild/bazelisk/releases/latest/download/bazelisk-linux-amd64 -O /usr/local/bin/bazel \
+    && chmod +x /usr/local/bin/bazel
+
+#
+# Install buildifier
+#
+RUN wget https://github.com/bazelbuild/buildtools/releases/latest/download/buildifier -O /usr/local/bin/buildifier \
+    && chmod +x /usr/local/bin/buildifier
