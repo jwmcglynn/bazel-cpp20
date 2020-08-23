@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "bazelbuild.vscode-bazel",
+        "cschlosser.doxdocgen",
+        "ms-vscode.cpptools",
+    ]
+}
