@@ -5,31 +5,6 @@ ARG VARIANT="ubuntu-21.04"
 FROM mcr.microsoft.com/vscode/devcontainers/cpp:0-${VARIANT}
 
 #
-# Install LLVM dependencies
-#
-RUN apt-get update \
-    && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends software-properties-common
-
-#
-# Install LLVM
-#
-RUN mkdir -p /tmp/llvm \
-    && cd /tmp/llvm \
-    && wget https://apt.llvm.org/llvm.sh \
-    && chmod +x ./llvm.sh \
-    && ./llvm.sh 10 \
-    && rm -rf /tmp/llvm
-
-# Install libc++
-RUN apt-get update \
-    && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends libc++-10-dev libc++abi-10-dev
-
-# Update path so this clang is first.
-ENV PATH=/usr/lib/llvm-10/bin:${PATH}
-
-#
 # Install bazelisk
 #
 RUN if [[ `dpkg --print-architecture` == "arm64" ]]; then \

@@ -1,7 +1,33 @@
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-# Use absl at head.
+##
+## Toolchain
+##
+git_repository(
+    name = "com_grailbio_bazel_toolchain",
+    commit = "9e71d562023dc7994e747110ee1ca345ad6b4413", # Latest as of 2022-05-01
+    remote = "https://github.com/grailbio/bazel-toolchain.git",
+)
+
+load("@com_grailbio_bazel_toolchain//toolchain:deps.bzl", "bazel_toolchain_dependencies")
+
+bazel_toolchain_dependencies()
+
+load("@com_grailbio_bazel_toolchain//toolchain:rules.bzl", "llvm_toolchain")
+
+llvm_toolchain(
+    name = "llvm_toolchain",
+    llvm_version = "11.0.0",
+)
+
+load("@llvm_toolchain//:toolchains.bzl", "llvm_register_toolchains")
+
+llvm_register_toolchains()
+
+##
+## absl, use at head since it is stable and follows the library's guidelines
+##
 git_repository(
     name = "com_google_absl",
     branch = "master",
