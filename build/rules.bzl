@@ -26,5 +26,9 @@ def cc_fuzzer(name, corpus, **kwargs):
         args = ["$(locations %s)" % corpus_name],
         linkstatic = 1,
         data = [corpus_name],
+        # Only run on Linux, since the macOS clang is missing libclang_rt.fuzzer_osx.a.
+        target_compatible_with = [
+            "@platforms//os:linux",
+        ],
         **kwargs
     )
