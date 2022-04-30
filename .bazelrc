@@ -1,10 +1,9 @@
-# Common flags for Clang
-build:clang --action_env=CC=clang
-build:clang --action_env=CXX=clang++
-build:clang --action_env=BAZEL_COMPILER=clang
+build --enable_platform_specific_config
+
+# Use registered clang toolchain.
+build:linux --incompatible_enable_cc_toolchain_resolution
 
 # Clang with libc++
-build:libc++ --config=clang
 build:libc++ --action_env=CXXFLAGS=-stdlib=libc++
 build:libc++ --action_env=LDFLAGS=-stdlib=libc++
 build:libc++ --action_env=BAZEL_CXXOPTS=-stdlib=libc++
@@ -17,9 +16,8 @@ build:c++20 --cxxopt=-std=c++20
 
 build --config=libc++ --config=c++20 --define absl=1
 
-# Build with CI
-build:ci --action_env=CC=/usr/lib/llvm-10/bin/clang
-build:ci --action_env=CXX=/usr/lib/llvm-10/bin/clang++
+# Fixes symbols when debugging on mac.
+build:macos --features=oso_prefix_is_pwd
 
 # Basic ASAN/UBSAN that works for gcc
 build:asan --linkopt -ldl
