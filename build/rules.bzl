@@ -1,3 +1,7 @@
+"""
+A simple rule for creating a fuzzer with LLVM libfuzzer
+"""
+
 load("@rules_cc//cc:defs.bzl", "cc_test")
 
 def cc_fuzzer(name, corpus, **kwargs):

@@ -8,7 +8,8 @@ build:libc++ --config=clang
 build:libc++ --action_env=CXXFLAGS=-stdlib=libc++
 build:libc++ --action_env=LDFLAGS=-stdlib=libc++
 build:libc++ --action_env=BAZEL_CXXOPTS=-stdlib=libc++
-build:libc++ --action_env=BAZEL_LINKLIBS=-lc++abi:-lc++
+# Also add "-lm" flag to avoid linker errors like "undefined reference to nan" for absl
+build:libc++ --action_env=BAZEL_LINKLIBS=-lc++abi:-lc++:-lm
 build:libc++ --define force_libcpp=enabled
 
 # C++20
