@@ -49,6 +49,21 @@ bazel build --config=asan-fuzzer //sample:sample_fuzzer
 bazel-bin/sample/sample_fuzzer
 ```
 
+## Code Coverage
+
+Coverage support is included based on the built-in `bazel coverage` sub-command, and a helper is included to wrap functionality and generate a coverage report.
+
+To run it, first ensure that java and lcov are installed, and then run:
+
+```
+build/coverage.sh
+```
+
+These dependencies are automatically installed in the devcontainer.  Outside of the devcontainer, this is the Ubuntu install command:
+```
+sudo apt-get openjdk-11-jdk lcov
+```
+
 ## Devcontainer
 
 To use the devcontainer, install the VSCode [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension.
