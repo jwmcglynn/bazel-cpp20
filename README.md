@@ -70,6 +70,8 @@ To enable uploading Code Coverage to https://codecov.io, find your repositories 
 
 Then set it as a GitHub Actions Secret using the GitHub [Creating encrypted secrets for a repository](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) instructions.
 
+See this template's code coverage report for an example: https://codecov.io/gh/jwmcglynn/bazel-cpp20
+
 ## Devcontainer
 
 To use the devcontainer, install the VSCode [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension.
