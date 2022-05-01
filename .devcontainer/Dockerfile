@@ -4,6 +4,8 @@
 ARG VARIANT="ubuntu-21.04"
 FROM mcr.microsoft.com/vscode/devcontainers/cpp:0-${VARIANT}
 
+ARG USERNAME=vscode
+
 #
 # Install bazelisk
 #
@@ -25,3 +27,10 @@ RUN if [[ `dpkg --print-architecture` == "arm64" ]]; then \
         wget https://github.com/bazelbuild/buildtools/releases/latest/download/buildifier-linux-amd64 -O /usr/local/bin/buildifier \
         && chmod +x /usr/local/bin/buildifier; \
     fi
+
+#
+# Set up command history volume
+# See https://code.visualstudio.com/remote/advancedcontainers/persist-bash-history
+#
+RUN mkdir /commandhistory \
+    && chown -R $USERNAME /commandhistory

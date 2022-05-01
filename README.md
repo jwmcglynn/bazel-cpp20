@@ -48,3 +48,34 @@ To run the fuzzer:
 bazel build --config=asan-fuzzer //sample:sample_fuzzer
 bazel-bin/sample/sample_fuzzer
 ```
+
+## Devcontainer
+
+To use the devcontainer, install the VSCode [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension.
+
+### Command History Syncing
+
+Command history syncing hooks, based on the [Advanced Containers: Persist bash history](https://code.visualstudio.com/remote/advancedcontainers/persist-bash-history) docs, are included.  Final registration is required to enable them, so it is recommended to use Dotfiles and add the following registration:
+
+#### Zsh Registration
+```
+# See https://code.visualstudio.com/remote/advancedcontainers/persist-bash-history
+if [ -d /commandhistory ]; then
+  touch /commandhistory/.zsh_history
+  export HISTFILE="/commandhistory/.zsh_history"
+else
+  echo "Warning: Could not enable history sharing, there is no /commandhistory directory."
+fi
+```
+
+#### Bash Registration
+```
+# See https://code.visualstudio.com/remote/advancedcontainers/persist-bash-history
+if [ -d /commandhistory ]; then
+  touch /commandhistory/.bash_history
+  export PROMPT_COMMAND='history -a'
+  export HISTFILE="/commandhistory/.bash_history"
+else
+  echo "Warning: Could not enable history sharing, there is no /commandhistory directory."
+fi
+```
