@@ -15,6 +15,15 @@ build --config=c++20 --config=with-absl
 # Fixes symbols when debugging on mac.
 build:macos --features=oso_prefix_is_pwd
 
+# Coverage builds
+coverage --config=coverage
+build:coverage --action_env=BAZEL_USE_LLVM_NATIVE_COVERAGE=1
+build:coverage --action_env=GCOV=llvm-profdata
+build:coverage --action_env=BAZEL_LLVM_COV=llvm-cov
+build:coverage --experimental_generate_llvm_lcov
+build:coverage --collect_code_coverage
+build:coverage --combined_report=lcov
+
 # Basic ASAN/UBSAN that works for gcc
 build:asan --linkopt -ldl
 build:asan --copt -fsanitize=address,undefined

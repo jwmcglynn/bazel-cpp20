@@ -29,6 +29,12 @@ RUN if [[ `dpkg --print-architecture` == "arm64" ]]; then \
     fi
 
 #
+# Install coverage dependencies: java and lcov
+#
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install --no-install-recommends openjdk-11-jdk lcov
+
+#
 # Set up command history volume
 # See https://code.visualstudio.com/remote/advancedcontainers/persist-bash-history
 #
