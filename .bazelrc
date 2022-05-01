@@ -3,18 +3,14 @@ build --enable_platform_specific_config
 # Use registered clang toolchain.
 build:linux --incompatible_enable_cc_toolchain_resolution
 
-# Clang with libc++
-build:libc++ --action_env=CXXFLAGS=-stdlib=libc++
-build:libc++ --action_env=LDFLAGS=-stdlib=libc++
-build:libc++ --action_env=BAZEL_CXXOPTS=-stdlib=libc++
-# Also add "-lm" flag to avoid linker errors like "undefined reference to nan" for absl
-build:libc++ --action_env=BAZEL_LINKLIBS=-lc++abi:-lc++:-lm
-build:libc++ --define force_libcpp=enabled
-
 # C++20
 build:c++20 --cxxopt=-std=c++20
 
-build --config=libc++ --config=c++20 --define absl=1
+# Also add "-lm" flag to avoid linker errors like "undefined reference to nan" for absl
+build:with-absl --action_env=BAZEL_LINKLIBS=-lm
+build:with-absl --define absl=1
+
+build --config=c++20 --config=with-absl
 
 # Fixes symbols when debugging on mac.
 build:macos --features=oso_prefix_is_pwd

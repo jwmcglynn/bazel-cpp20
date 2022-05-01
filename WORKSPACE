@@ -18,7 +18,11 @@ load("@com_grailbio_bazel_toolchain//toolchain:rules.bzl", "llvm_toolchain")
 
 llvm_toolchain(
     name = "llvm_toolchain",
-    llvm_version = "11.0.0",
+    llvm_version = "14.0.0",
+    stdlib = {
+        "linux-x86_64": "builtin-libc++",
+        "linux-aarch64": "builtin-libc++",
+    },
 )
 
 load("@llvm_toolchain//:toolchains.bzl", "llvm_register_toolchains")
