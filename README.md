@@ -64,6 +64,12 @@ These dependencies are automatically installed in the devcontainer.  Outside of 
 sudo apt-get openjdk-11-jdk lcov
 ```
 
+### Integration with Codecov.io
+
+To enable uploading Code Coverage to https://codecov.io, find your repositories upload token, see the instructions in the Codecov FAQ: [Where is the repository upload token found?](https://docs.codecov.com/docs/frequently-asked-questions#where-is-the-repository-upload-token-found).
+
+Then set it as a GitHub Actions Secret using the GitHub [Creating encrypted secrets for a repository](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) instructions.
+
 ## Devcontainer
 
 To use the devcontainer, install the VSCode [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension.
