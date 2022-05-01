@@ -28,6 +28,6 @@ build:asan --linkopt -fno-sanitize=vptr,function
 # Fuzzing builds
 build:asan-fuzzer --config=asan
 build:asan-fuzzer --define=FUZZING_ENGINE=libfuzzer
-#build:asan-fuzzer --copt=-fsanitize=fuzzer-no-link
+build:asan-fuzzer --copt=-fsanitize=fuzzer-no-link
 build:asan-fuzzer --copt=-fno-omit-frame-pointer
 build:asan-fuzzer --copt=-DFUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION
