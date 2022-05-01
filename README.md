@@ -5,47 +5,24 @@ This template sets up a coding environment for C++20 with VSCode, GitHub, and Cl
 ## Requirements
 
 * Bazel
-* Clang-10
 
 ### Install Bazel
 
 The recommended way to use Bazel is to install **Bazelisk**, which will automatically download Bazel as required. To install:
 
-1. Navigate to the Bazelisk releases page: https://github.com/bazelbuild/bazelisk/releases/latest/download/bazelisk-linux-amd64
-2. Download the latest releases, and install it as `~/bin/bazel`
+1. Navigate to the Bazelisk releases page: https://github.com/bazelbuild/bazelisk/releases
+2. Download the latest release, and install it as `~/bin/bazel`
 3. `chmod +x ~/bin/bazel`
 4. Update your `~/.bashrc` (or equivalent) to add this directory to your path:
     ```
     export PATH=$PATH:$HOME/bin
     ```
 
-### Installing Clang-10
+## macOS: Install XCode
 
-To install Clang-10, follow the instructions to install it on the main LLVM site. For Ubuntu 18.04, the instructions are at https://apt.llvm.org/
+On Linux, this workspace is configured to automatically download Clang and configure it as a toolchain, but that mode does not support Apple Silicon yet.  So to enable building for macOS, the system toolchain is used instead.
 
-```
-wget https://apt.llvm.org/llvm.sh
-chmod +x llvm.sh
-sudo ./llvm.sh 10
-```
-
-You'll also need to manually install `libc++-10`, which should now work with apt after running `llvm.sh`:
-
-```
-sudo apt-get install libc++-10-dev libc++abi-10-dev
-```
-
-Then update your path so that clang-10 is at the start, again in `~/.bashrc` or equivalent:
-
-```
-export PATH=/usr/lib/llvm-10/bin:$PATH
-```
-
-Verify this works with
-
-```
-clang -v
-```
+Note that on macOS fuzzing builds are not yet supported.
 
 ## That's it!
 
